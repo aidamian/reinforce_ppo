@@ -53,6 +53,13 @@ class Agent(nn.Module):
   
 
 def discounted_rewards(rewards, gamma, normalize=True):
+  """
+      Because we have a Markov process, the action at time-step tt can only affect 
+      the future reward, so the past reward shouldn’t be contributing to the policy 
+      gradient. So to properly assign credit to the action a_ta, we should ignore 
+      the past reward. So a better policy gradient would simply have the future 
+      reward as the coefficient .  
+  """
   t_rewards = 0
   disc_rewards = np.zeros(len(rewards))
   for i in reversed(range(len(rewards))):
@@ -113,17 +120,36 @@ def reinforce(env, agent, n_episodes=2000, max_t=1000,
     if not use_disc_rewards:
       discounts = [gamma**i for i in range(len(rewards)+1)]
       R = sum([a*b for a,b in zip(discounts, rewards)])
-      
-      policy_loss = []
-      for log_prob in saved_log_probs:
-        policy_loss.append(-log_prob * R)
-      policy_loss = torch.cat(policy_loss).sum()
+      disc_rewards = [R] * len(saved_log_probs)
     else:
       disc_rewards = discounted_rewards(rewards, gamma)
-      policy_loss = []
-      for i,log_prob in enumerate(saved_log_probs):
-        policy_loss.append(-log_prob * disc_rewards[i])
-      policy_loss = torch.cat(policy_loss).sum()
+
+    policy_loss = []
+    """
+        our goal is to optimize (max) sum(proba * disc_reward) for all steps
+        example 1:
+          gamma  = 1
+          t = 0.5
+          P(1 | state) = t  
+          P(0 | state) = 1 - t
+          action = 1 0 1
+          reward = 0 0 1
+          =>
+          disc rewards = [0 + gamma * 1] [0 + gamma * 1] [1]
+          grad = dlogP(1) * 1 + dlogP(0) * 1 + dlogP(0) * 1
+          grad = 1 / P(1) * dP(1) * 1 + 1 / P(0) * dP(0) * 1+ 1 / P(0) * dP(0) * 1
+          grad = (1/t) * 1 + (1/(1-t) * (-1)) * 1 + (1/(1-t) * (-1)) * 1
+          
+        example 2:
+          actions: (0,1,0) rewards: (1,0,1)
+          conclusions: 
+            last two step-grads cancel each other and thus using total reward 
+            will yield the same gradient results
+          
+    """
+    for i,log_prob in enumerate(saved_log_probs):
+      policy_loss.append(-log_prob * disc_rewards[i])
+    policy_loss = torch.cat(policy_loss).sum()
     
     optimizer.zero_grad()
     policy_loss.backward()
@@ -147,8 +173,11 @@ def reinforce(env, agent, n_episodes=2000, max_t=1000,
 
 e = gym.make('CartPole-v0')
 
-p1 = EnvPlayer(env=e)
-p1.play()
+play_random = False
+
+if play_random:
+  p1 = EnvPlayer(env=e)
+  p1.play()
 
 e.seed(0)
 print('observation space:', e.observation_space)
