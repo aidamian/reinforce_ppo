@@ -13,7 +13,7 @@ Numeber of steps until a solution is found:
 
 ### Test #2
 
-`reinforce_test2.py` uses either vanilla *REINFORCE* or *PPO PG* to solve pong. Below are the comparision results for both methods:
+`reinforce_test2.py` uses either vanilla *REINFORCE* or *PPO PG* to solve `'PongDeterministic-v4'` env. Below are the comparision results for both methods:
 
 #### PPO
 
@@ -21,12 +21,16 @@ For the *PPO PG* the policy manages to win some (almost constantly) at episode 3
 ```
 Episode: 350, score:    1.2
   Workers: [-1.  1.  1.  1.  1.  3.  3.  1.]
+  
 Episode: 355, score:    0.5
   Workers: [ 3.  3. -3.  0.  0.  0. -2.  3.]
+  
 Episode: 360, score:    1.5
   Workers: [ 3.  3.  3.  1. -2. -2.  3.  3.]
+  
 Episode: 365, score:    0.1
   Workers: [ 0. -1.  0.  3.  0. -2.  1.  0.]
+  
 Episode: 370, score:    2.5
   Workers: [5. 1. 3. 3. 1. 3. 1. 3.]
 ```
@@ -36,12 +40,16 @@ and finally around episode  the results are showing good and consistent policy
 ```
 Episode: 500, score:    4.8
   Workers: [3. 5. 5. 5. 5. 5. 5. 5.]
+  
 Episode: 505, score:    5.0
   Workers: [5. 5. 5. 5. 5. 5. 5. 5.]
+  
 Episode: 510, score:    5.0
   Workers: [5. 5. 5. 5. 5. 5. 5. 5.]
 ```
 ![ppo](https://github.com/andreidi/pytorch_reinforce_cart/blob/master/ppo_results.png)
+
+And here is the agent winning the game:
 
 ![ppo](https://github.com/andreidi/pytorch_reinforce_cart/blob/master/PPO_play_test.gif)
 
@@ -50,5 +58,18 @@ Episode: 510, score:    5.0
 in contrast the vanilla *REINFORCE* version does not perform well even after 800 episodes
 
 ![ppo](https://github.com/andreidi/pytorch_reinforce_cart/blob/master/REINFORCE_8_workers.png)
-
+```
+Episode: 785, score:   -8.2,  time:  1.5 min / 82.0 min
+  Workers: [ -3. -12.  -7.  -8. -11.  -9.  -6. -10.]
+  
+Episode: 790, score:   -6.4,  time:  1.0 min / 81.9 min
+  Workers: [ -8.  -5. -10.  -3.  -7.  -7.  -5.  -6.]
+  
+Episode: 795, score:   -5.9,  time:  0.5 min / 81.9 min
+  Workers: [-3. -1. -5. -8. -6. -6. -9. -9.]
+  
+Episode: 800, score:   -5.5,  time:  0.0 min / 81.9 min
+  Workers: [ -2.  -3.  -8. -10.  -1. -10.  -9.  -1.]
+```
+And here is the test play (REINFORCE agent obviously losing the game):
 ![ppo](https://github.com/andreidi/pytorch_reinforce_cart/blob/master/REINFORCE_play_test.gif)
