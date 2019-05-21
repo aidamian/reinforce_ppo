@@ -72,4 +72,5 @@ Episode: 800, score:   -5.5,  time:  0.0 min / 81.9 min
   Workers: [ -2.  -3.  -8. -10.  -1. -10.  -9.  -1.]
 ```
 And here is the test play (REINFORCE agent obviously losing the game):
+
 ![ppo](https://github.com/andreidi/pytorch_reinforce_cart/blob/master/REINFORCE_play_test.gif)
