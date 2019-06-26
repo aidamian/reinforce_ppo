@@ -1,4 +1,4 @@
-# REINFOCE & PPO PyTorch implementation 
+# REINFOCE & PPO PyTorch & Tensorflow implementations
 
 ### Test #1 TH
 
