@@ -5,12 +5,17 @@ import cv2
 from time import time, sleep
 from datetime import datetime as dt
 
+import numpy as np
+
 import imageio
+
+__VER__ = '0.9.1'
 
 
 class EnvPlayer:
   def __init__(self, env=None, agent=None, save_gif='test.gif', frames_only=False):
     self.frames_only = frames_only    
+    self.__version__ = __VER__
     self.env = env
     if not self.frames_only:
       if self.env is None:
@@ -45,6 +50,8 @@ class EnvPlayer:
           act = self.agent.act(self.state)
         else:
           act = self.env.action_space.sample()
+      if (type(act) is np.ndarray) and (act.shape[0] == 1) and len(act.shape)>1:
+        act = act.squeeze()
       obs, r, done, info = self.env.step(act)
       self.done = done    
       self.state = obs
@@ -71,6 +78,7 @@ class EnvPlayer:
     self.video_started = False
     if self.save_gif:
       imageio.mimsave(self.save_gif, self.buff_frames)
+      print("Animated gif saved in {}".format(self.save_gif))
     return
   
   def _show_message(self, np_img, _text):

@@ -1,6 +1,6 @@
 # REINFOCE & PPO PyTorch implementation 
 
-### Test #1
+### Test #1 TH
 
 `reinforce_test1.py` uses `CartPole-v0` environment for basic REINFORCE. Included are grad calculation examples.
 Numeber of steps until a solution is found:    
@@ -10,6 +10,12 @@ Numeber of steps until a solution is found:
 ![cart_normed_disc_rewards](https://github.com/andreidi/pytorch_reinforce_cart/blob/master/cart_reinforce.gif)
 
 
+### Test #1 Keras
+
+A secondary implementation is provided based on Tensorflow in `reinforce_test1_tf.py` with similar results. 
+This particular implementation purpose is to demonstrate how to setup the training process for `REINFOCE` method with Tensorflow. Two methods are provided. 
+
+![cart_anim](20190626_084648_test.gif)
 
 ### Test #2
 
