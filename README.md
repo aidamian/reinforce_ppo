@@ -5,9 +5,11 @@ This repository contains Torch & Tensorflow implementations of *_REINFORCE_* and
 ### Test #1 TH
 
 `reinforce_test1.py` uses `CartPole-v0` environment for basic REINFORCE. Included are grad calculation examples.
-Numeber of steps until a solution is found:    
+```
+Number of steps until a solution is found:    
   Simple G calculation: 1353.0
   Normed disc rewards:   352.0
+```
 
 ![cart_normed_disc_rewards](https://github.com/andreidi/pytorch_reinforce_cart/blob/master/cart_reinforce.gif)
 
@@ -16,6 +18,28 @@ Numeber of steps until a solution is found:
 
 A secondary implementation is provided based on Tensorflow in `reinforce_test1_tf.py` with similar results. 
 This particular implementation purpose is to demonstrate how to setup the training process for `REINFOCE` method with Tensorflow. Two methods are provided. 
+
+```
+Training with normed_disc_rewards=True
+Episode 100     Average Score: 92.54    Average time/ep: 0.17s
+Episode 200     Average Score: 155.79   Average time/ep: 0.27s
+Episode 300     Average Score: 162.27   Average time/ep: 0.28s
+Episode 400     Average Score: 174.52   Average time/ep: 0.30s
+Environment solved in 422 episodes!     Average Score: 195.63
+Agent init
+Training with normed_disc_rewards=False
+Episode 100     Average Score: 21.02    Average time/ep: 0.05s
+Episode 200     Average Score: 46.70    Average time/ep: 0.08s
+Episode 300     Average Score: 83.94    Average time/ep: 0.15s
+Episode 400     Average Score: 181.34   Average time/ep: 0.32s
+Episode 500     Average Score: 114.80   Average time/ep: 0.20s
+Episode 600     Average Score: 44.91    Average time/ep: 0.08s
+Episode 700     Average Score: 53.18    Average time/ep: 0.10s
+Episode 800     Average Score: 80.72    Average time/ep: 0.15s
+Episode 900     Average Score: 77.35    Average time/ep: 0.14s
+Episode 1000    Average Score: 181.07   Average time/ep: 0.32s
+Environment solved in 1024 episodes!    Average Score: 195.06
+```
 
 ![cart_anim](20190626_084648_test.gif)
 

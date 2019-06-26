@@ -278,7 +278,7 @@ if __name__ == '__main__':
       
   results = sorted(results, key=lambda x:x[1])
   for result in results:    
-    print("Rrsult: {} avg nr of steps until completion for :  {}".format(
+    print("Result: {} avg nr of steps until completion for :  {}".format(
         result[1], result[0]))
   
   p2 = EnvPlayer(env=e, agent=best_agent)
