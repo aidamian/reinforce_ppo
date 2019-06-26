@@ -1,6 +1,6 @@
 # REINFORCE & PPO PyTorch & Tensorflow implementations
 
-This repository contains Torch & Tensorflow implementations of _*REINFORCE*_ and _*Proximal Policy Optimization*_ Deep Reinforcement Learning methods. Also provided in the repo is the `pong_karpathy.py` file courtesy of Andrej Karpathy from the famous 2016 blog-post [http://karpathy.github.io/2016/05/31/rl/]
+This repository contains Torch & Tensorflow implementations of *_REINFORCE_* and *_Proximal Policy Optimization_* Deep Reinforcement Learning methods. Also provided in the repo is the `pong_karpathy.py` file courtesy of Andrej Karpathy from the famous 2016 blog-post [http://karpathy.github.io/2016/05/31/rl/]
 
 ### Test #1 TH
 
